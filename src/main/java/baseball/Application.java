@@ -46,10 +46,16 @@ public class Application {
     }
 
     public static void endOrRestart() {
-        int answer = Integer.parseInt(Console.readLine());
-        if(answer != 2 && answer != 1) throw new IllegalArgumentException("1과 2 중 하나만 입력해주세요!");
-        if(answer == 1) Game();
-        if(answer == 2) System.exit(0);
+        try {
+            int answer = Integer.parseInt(Console.readLine());
+            if(answer == 1) Game();
+            if(answer == 2) System.exit(0);
+        } catch(IllegalArgumentException e) {
+            System.out.println("1과 2 중 하나만 입력해주세요!");
+            Game();
+        }
+
+        //if(answer != 2 && answer != 1) throw new IllegalArgumentException("1과 2 중 하나만 입력해주세요!");
     }
 
     public static void tellResult() {
@@ -81,6 +87,5 @@ public class Application {
 
     public static void main(String[] args) {
         Game();
-
     }
 }
