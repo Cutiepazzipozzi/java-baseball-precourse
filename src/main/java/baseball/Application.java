@@ -48,7 +48,7 @@ public class Application {
     public static void endOrRestart() {
         int answer = Integer.parseInt(Console.readLine());
         if(answer != 2 && answer != 1) throw new IllegalArgumentException("1과 2 중 하나만 입력해주세요!");
-
+        if(answer == 1) Game();
         if(answer == 2) System.exit(0);
     }
 
@@ -64,10 +64,7 @@ public class Application {
         }
     }
 
-    //재시작하거나 종료하는 코드 작성하기
-
-    public static void main(String[] args) {
-
+    public static void Game() {
         correctNum = createCorrectNumber();
 
         System.out.print("숫자를 입력해주세요 : ");
@@ -79,8 +76,11 @@ public class Application {
         findBallAndStrike(correctNum, playerNum);
 
         tellResult();
+    }
+    //재시작하거나 종료하는 코드 작성하기
 
-
+    public static void main(String[] args) {
+        Game();
 
     }
 }
