@@ -18,9 +18,9 @@ public class Application {
     public static boolean checkCorrectNum(String enterNum) {
         boolean setError = false;
         if(enterNum.length() != 3) setError = true;
-        else if(enterNum.charAt(0) != enterNum.charAt(1)
-                && enterNum.charAt(1) != enterNum.charAt(2)
-                && enterNum.charAt(0) != enterNum.charAt(2)) setError = true;
+        else if(enterNum.charAt(0) == enterNum.charAt(1)
+                || enterNum.charAt(1) == enterNum.charAt(2)
+                || enterNum.charAt(0) == enterNum.charAt(2)) setError = true;
         return setError;
     }
 
@@ -45,10 +45,21 @@ public class Application {
         ballNumber -= strikeNumber;
     }
 
+    public static void endOrRestart() {
+        int answer = Integer.parseInt(Console.readLine());
+        if(answer != 2 && answer != 1) throw new IllegalArgumentException("1과 2 중 하나만 입력해주세요!");
+    }
 
-    public static void endGame() {
-        System.out.print("3개의 숫자를 모두 맞히셨습니다 ! 게임 종료");
-        System.out.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
+    public static void tellResult() {
+        if(ballNumber==0 && strikeNumber == 0) System.out.println("낫싱");
+        else if(strikeNumber==0) System.out.println(ballNumber+"볼");
+        else if(ballNumber==0) System.out.println(strikeNumber+"스트라이크");
+        else if(strikeNumber>0 && ballNumber > 0) System.out.println(ballNumber+"볼 " + strikeNumber + "스트라이크");
+        else {
+            System.out.print("3개의 숫자를 모두 맞히셨습니다 ! 게임 종료");
+            System.out.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
+            endOrRestart();
+        }
     }
 
     //재시작하거나 종료하는 코드 작성하기
@@ -59,11 +70,13 @@ public class Application {
 
         System.out.print("숫자를 입력해주세요 : ");
         if(checkCorrectNum(Console.readLine())) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("제대로 된 3자리 수를 입력해주세요!");
         }
         playerNum = madeArr(Integer.parseInt(Console.readLine()));
         //여기 일단 깔끔하게 고쳐보기
+        findBallAndStrike(correctNum, playerNum);
 
+        tellResult();
 
 
 
