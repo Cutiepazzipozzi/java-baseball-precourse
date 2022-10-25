@@ -29,16 +29,29 @@ public class Application {
         return new int[]{enterNum/100, (enterNum/10)/10, enterNum%10};
     }
 
-    public static int findStrike(int[] arr1, int[] arr2) {
+    public static boolean findBallAndStrikeCal(int[] arr, int num) {
+        boolean hasRepeat = false;
         for(int i=0; i<3; i++) {
-            if(arr1[i] == arr2[i]) strikeNumber++;
+            if(arr[i] == num) return true;
         }
-        return strikeNumber;
+        return hasRepeat;
     }
 
-    public static int findBall(int[] arr1, int[] arr2) {
-        for(int i=)
+    public static void findBallAndStrike(int[] arr1, int[] arr2) {
+        for(int i=0; i<3; i++) {
+            if(findBallAndStrikeCal(arr1, arr2[i])) ballNumber++;
+            if(arr1[i] == arr2[i]) strikeNumber++;
+        }
+        ballNumber -= strikeNumber;
     }
+
+
+    public static void endGame() {
+        System.out.print("3개의 숫자를 모두 맞히셨습니다 ! 게임 종료");
+        System.out.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
+    }
+
+    //재시작하거나 종료하는 코드 작성하기
 
     public static void main(String[] args) {
 
