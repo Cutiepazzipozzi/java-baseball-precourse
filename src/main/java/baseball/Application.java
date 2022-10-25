@@ -24,9 +24,13 @@ public class Application {
         return setError;
     }
 
-    public static int[] madeArr(int enterNum) {
+    public static int[] madeArr(String enterNum) {
         // 사용자로부터 입력받은 수를 한자리씩 배열로 받아옴
-        return new int[]{enterNum/100, (enterNum/10)/10, enterNum%10};
+        int[] enterNumArr = new int[3];
+        for(int i=0; i<3; i++) {
+            enterNumArr[i] = Character.getNumericValue(enterNum.charAt(i));
+        }
+        return enterNumArr;
     }
 
     public static boolean findBallAndStrikeCal(int[] arr, int num) {
@@ -46,23 +50,18 @@ public class Application {
     }
 
     public static void endOrRestart() {
-        try {
-            int answer = Integer.parseInt(Console.readLine());
-            if(answer == 1) Game();
-            if(answer == 2) System.exit(0);
-        } catch(IllegalArgumentException e) {
-            System.out.println("1과 2 중 하나만 입력해주세요!");
-            Game();
-        }
+        int answer = Integer.parseInt(Console.readLine());
+        if(answer != 1 && answer != 2) throw new IllegalArgumentException("1과 2 중 하나만 입력해주세요!");
 
-        //if(answer != 2 && answer != 1) throw new IllegalArgumentException("1과 2 중 하나만 입력해주세요!");
+        if(answer == 1) Game();
+        if(answer == 2) System.exit(0);
     }
 
     public static void tellResult() {
         if(ballNumber==0 && strikeNumber == 0) System.out.println("낫싱");
-        else if(strikeNumber==0) System.out.println(ballNumber+"볼");
-        else if(ballNumber==0) System.out.println(strikeNumber+"스트라이크");
-        else if(strikeNumber>0 && ballNumber > 0) System.out.println(ballNumber+"볼 " + strikeNumber + "스트라이크");
+        else if(strikeNumber == 0) System.out.println(ballNumber+"볼");
+        else if(ballNumber == 0) System.out.println(strikeNumber+"스트라이크");
+        else if(strikeNumber > 0 && ballNumber > 0) System.out.println(ballNumber+"볼 " + strikeNumber + "스트라이크");
         else {
             System.out.println("3개의 숫자를 모두 맞히셨습니다 ! 게임 종료");
             System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
@@ -77,7 +76,7 @@ public class Application {
         if(checkCorrectNum(Console.readLine())) {
             throw new IllegalArgumentException("제대로 된 3자리 수를 입력해주세요!");
         }
-        playerNum = madeArr(Integer.parseInt(Console.readLine()));
+        playerNum = madeArr(Console.readLine());
         //여기 일단 깔끔하게 고쳐보기
         findBallAndStrike(correctNum, playerNum);
 
