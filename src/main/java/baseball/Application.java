@@ -48,6 +48,8 @@ public class Application {
     public static void endOrRestart() {
         int answer = Integer.parseInt(Console.readLine());
         if(answer != 2 && answer != 1) throw new IllegalArgumentException("1과 2 중 하나만 입력해주세요!");
+
+        if(answer == 2) System.exit(0);
     }
 
     public static void tellResult() {
@@ -56,8 +58,8 @@ public class Application {
         else if(ballNumber==0) System.out.println(strikeNumber+"스트라이크");
         else if(strikeNumber>0 && ballNumber > 0) System.out.println(ballNumber+"볼 " + strikeNumber + "스트라이크");
         else {
-            System.out.print("3개의 숫자를 모두 맞히셨습니다 ! 게임 종료");
-            System.out.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
+            System.out.println("3개의 숫자를 모두 맞히셨습니다 ! 게임 종료");
+            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
             endOrRestart();
         }
     }
