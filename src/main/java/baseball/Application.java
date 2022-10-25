@@ -1,20 +1,28 @@
 package baseball;
-import static camp.nextstep.edu.missionutils.Console.readLine;
-import static camp.nextstep.edu.missionutils.Randoms.pickNumberInRange;
+import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class Application {
-    public static int madeNumber(int num) {
+    public static int[] correctNum = new int[3];
+    public static int[] playerNum = new int[3];
+    public static int strikeNumber = 0;
+    public static int ballNumber = 0;
+
+    public static int[] createCorrectNumber() {
         for(int i=0; i<3; i++) {
-            num += Math.pow(10, 2-i)*pickNumberInRange(1,9);
+            correctNum[i] = Randoms.pickNumberInRange(1, 9);
         }
-        return num;
+        return correctNum;
     }
+    public static int[] madeArr(int EnterNum) {
+        // 사용자로부터 입력받은 수를 한자리씩 배열로 받아옴
+        return new int[]{EnterNum/100, (EnterNum/10)/10, EnterNum%10};
+    }
+
     public static void main(String[] args) {
 
-        int CorrectNum = 0;
-        int EnterNum = 0;
+        correctNum = createCorrectNumber();
+        playerNum = madeArr(Integer.parseInt(Console.readLine()));
 
-        madeNumber(CorrectNum);
-        EnterNum = Integer.parseInt(readLine());
     }
 }
